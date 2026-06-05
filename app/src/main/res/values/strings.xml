@@ -1,3 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">CalorieMate</string>
+
+    <string name="label_full_name">Full Name</string>
+    <string name="label_email">Email</string>
+    <string name="label_password">Password</string>
+    <string name="label_calorie_target">Daily Calorie Target (kcal)</string>
+    <string name="btn_login">Login</string>
+    <string name="btn_register">Register</string>
+    <string name="link_go_register">Don\'t have an account? Register</string>
+    <string name="link_go_login">Already have an account? Login</string>
+
+    <string name="nav_home">Home</string>
+    <string name="nav_search">Search</string>
+    <string name="nav_log">Log</string>
+    <string name="nav_profile">Profile</string>
+
+    <string name="greeting">Hello, %1$s</string>
+    <string name="label_calories">Calories</string>
+    <string name="label_protein">Protein</string>
+    <string name="label_fat">Fat</string>
+    <string name="label_carbs">Carbs</string>
+    <string name="btn_add_food">Add Food</string>
+    <string name="unit_kcal">kcal</string>
+    <string name="unit_gram">g</string>
+    <string name="label_today_progress">Today\'s Progress</string>
+
+    <string name="hint_search">Search food...</string>
+    <string name="btn_search">Search</string>
+    <string name="msg_empty_search">No results found</string>
+    <string name="msg_error_network">Network unavailable. Please try again.</string>
+    <string name="btn_retry">Retry</string>
+
+    <string name="btn_add_to_log">Add to Today\'s Log</string>
+    <string name="label_nutrition_info">Nutrition Info (per 100g)</string>
+
+    <string name="msg_empty_log">No food logged today</string>
+    <string name="btn_delete">Delete</string>
+
+    <string name="label_dark_theme">Dark Theme</string>
+    <string name="btn_edit_target">Edit Target</string>
+    <string name="btn_logout">Logout</string>
+    <string name="hint_new_target">Enter new calorie target</string>
+    <string name="btn_save">Save</string>
+    <string name="btn_cancel">Cancel</string>
 </resources>
