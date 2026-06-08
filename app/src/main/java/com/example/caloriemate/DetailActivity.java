@@ -1,5 +1,6 @@
 package com.example.caloriemate;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.bumptech.glide.Glide;
 import com.example.caloriemate.database.DatabaseHelper;
@@ -40,11 +42,9 @@ public class DetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
-        // Back button
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setTitle("");
-        }
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(v -> finish());
 
         dbHelper = new DatabaseHelper(this);
         prefs = getSharedPreferences("caloriemate_prefs", MODE_PRIVATE);
@@ -58,7 +58,6 @@ public class DetailActivity extends AppCompatActivity {
         tvCarbs = findViewById(R.id.tvCarbs);
         btnAddToLog = findViewById(R.id.btnAddToLog);
 
-        // Get data from Intent
         foodName = getIntent().getStringExtra("food_name");
         foodBrand = getIntent().getStringExtra("food_brand");
         foodImage = getIntent().getStringExtra("food_image");
@@ -67,7 +66,6 @@ public class DetailActivity extends AppCompatActivity {
         foodFat = getIntent().getDoubleExtra("food_fat", 0);
         foodCarbs = getIntent().getDoubleExtra("food_carbs", 0);
 
-        // Set data to views
         tvFoodName.setText(foodName != null ? foodName : "Unknown");
         tvBrand.setText(foodBrand != null && !foodBrand.isEmpty() ? foodBrand : "");
         tvCalories.setText((int) foodCalories + " kcal");
@@ -100,17 +98,15 @@ public class DetailActivity extends AppCompatActivity {
                 btnAddToLog.setEnabled(true);
                 if (success) {
                     Toast.makeText(this, foodName + " added to today's log!", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(this, DashboardActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    intent.putExtra("navigate_to", "home");
+                    startActivity(intent);
                     finish();
                 } else {
                     Toast.makeText(this, "Failed to add food. Try again.", Toast.LENGTH_SHORT).show();
                 }
             });
         });
-    }
-
-    @Override
-    public boolean onSupportNavigateUp() {
-        finish();
-        return true;
     }
 }

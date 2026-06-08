@@ -102,6 +102,13 @@ public class SearchFragment extends Fragment {
         });
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        foodList.clear();
+        lastQuery = "";
+    }
+
     private void searchFood(String query) {
         showLoading();
 
