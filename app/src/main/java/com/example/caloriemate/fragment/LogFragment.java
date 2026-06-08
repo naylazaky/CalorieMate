@@ -1,5 +1,6 @@
 package com.example.caloriemate.fragment;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
@@ -15,6 +16,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.caloriemate.DetailActivity;
 import com.example.caloriemate.R;
 import com.example.caloriemate.adapter.LogAdapter;
 import com.example.caloriemate.database.DatabaseHelper;
@@ -56,7 +58,9 @@ public class LogFragment extends Fragment {
         rvLogList = view.findViewById(R.id.rvLogList);
         tvEmptyLog = view.findViewById(R.id.tvEmptyLog);
 
-        adapter = new LogAdapter(logList, (log, position) -> deleteLog(log, position));
+        adapter = new LogAdapter(logList,
+                (log, position) -> deleteLog(log, position),
+                log -> openDetail(log));
 
         rvLogList.setLayoutManager(new LinearLayoutManager(requireContext()));
         rvLogList.setAdapter(adapter);
@@ -103,5 +107,18 @@ public class LogFragment extends Fragment {
                 }
             });
         });
+    }
+
+    private void openDetail(FoodLog log) {
+        Intent intent = new Intent(requireContext(), DetailActivity.class);
+        intent.putExtra("food_name", log.getFoodName());
+        intent.putExtra("food_brand", "");
+        intent.putExtra("food_image", "");
+        intent.putExtra("food_calories", log.getCalories());
+        intent.putExtra("food_protein", log.getProtein());
+        intent.putExtra("food_fat", log.getFat());
+        intent.putExtra("food_carbs", log.getCarbs());
+        intent.putExtra("from_log", true);
+        startActivity(intent);
     }
 }

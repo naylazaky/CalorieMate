@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -65,6 +66,7 @@ public class DetailActivity extends AppCompatActivity {
         foodProtein = getIntent().getDoubleExtra("food_protein", 0);
         foodFat = getIntent().getDoubleExtra("food_fat", 0);
         foodCarbs = getIntent().getDoubleExtra("food_carbs", 0);
+        boolean fromLog = getIntent().getBooleanExtra("from_log", false);
 
         tvFoodName.setText(foodName != null ? foodName : "Unknown");
         tvBrand.setText(foodBrand != null && !foodBrand.isEmpty() ? foodBrand : "");
@@ -72,6 +74,11 @@ public class DetailActivity extends AppCompatActivity {
         tvProtein.setText((int) foodProtein + " g");
         tvFat.setText((int) foodFat + " g");
         tvCarbs.setText((int) foodCarbs + " g");
+
+        // Sembunyikan tombol Add to Log kalau dibuka dari Log
+        if (fromLog) {
+            btnAddToLog.setVisibility(View.GONE);
+        }
 
         if (foodImage != null && !foodImage.isEmpty()) {
             Glide.with(this)

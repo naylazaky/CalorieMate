@@ -17,15 +17,21 @@ import java.util.List;
 public class LogAdapter extends RecyclerView.Adapter<LogAdapter.ViewHolder> {
 
     private List<FoodLog> logList;
-    private OnDeleteClickListener listener;
+    private OnDeleteClickListener deleteListener;
+    private OnItemClickListener itemListener;
 
     public interface OnDeleteClickListener {
         void onDeleteClick(FoodLog log, int position);
     }
 
-    public LogAdapter(List<FoodLog> logList, OnDeleteClickListener listener) {
+    public interface OnItemClickListener {
+        void onItemClick(FoodLog log);
+    }
+
+    public LogAdapter(List<FoodLog> logList, OnDeleteClickListener deleteListener, OnItemClickListener itemListener) {
         this.logList = logList;
-        this.listener = listener;
+        this.deleteListener = deleteListener;
+        this.itemListener = itemListener;
     }
 
     @NonNull
@@ -44,7 +50,10 @@ public class LogAdapter extends RecyclerView.Adapter<LogAdapter.ViewHolder> {
         holder.tvLogTime.setText(log.getTimeLogged());
 
         holder.btnDeleteLog.setOnClickListener(v ->
-                listener.onDeleteClick(log, holder.getAdapterPosition()));
+                deleteListener.onDeleteClick(log, holder.getAdapterPosition()));
+
+        holder.itemView.setOnClickListener(v ->
+                itemListener.onItemClick(log));
     }
 
     @Override
